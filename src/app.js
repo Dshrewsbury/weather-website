@@ -5,6 +5,7 @@ const app = express();
 const request = require("request");
 const geocode = require("./utils/geocode");
 const forecast = require("./utils/forecast");
+const port = process.env.PORT || 3000;
 
 // Define paths for express config
 const publicDirectoryPath = path.join(__dirname, "../public");
@@ -27,7 +28,9 @@ app.get("", (req, res) => {
   });
 });
 
-// Basic about page detailing my portfolio
+/* About me page outlining my experiences/passions 
+    TODO: Create front end via React
+*/
 app.get("/about", (req, res) => {
   res.render("about"),
     {
@@ -44,19 +47,6 @@ app.get("/help", (req, res) => {
       title: "Help",
       name: "Dan"
     };
-});
-
-//
-app.get("/products", (req, res) => {
-  if (!req.query.search) {
-    return res.send({
-      error: "You must provide a search term."
-    });
-  }
-
-  res.send({
-    products: []
-  });
 });
 
 // Return
@@ -111,6 +101,6 @@ app.get("*", (req, res) => {
     };
 });
 
-app.listen(3000, () => {
-  console.log("Server is up on port 3000.");
+app.listen(port, () => {
+  console.log("Server is up on port " + port);
 });
